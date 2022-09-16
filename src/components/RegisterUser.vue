@@ -1,7 +1,12 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-   
+    <p>
+    My name is <input v-model="name">
+    and I am <input v-model="age"> years old.
+  </p>
+  <p>
+    <button @click="persist">Save</button>
+  </p>
   </div>
 </template>
 
