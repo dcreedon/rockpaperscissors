@@ -48,6 +48,19 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 
+# Approach
+ 
+ SPA (Single Page Application)
+
+ Local storage for storing user registration, score and other details.
+ Storage is persistent but local to client. It is not session storage.
+ Once the user registers they are logged in.
+ If they log out then the user will have to log in again.
+ Only one user can be registered/login at a time per browser.
+
+ Once registered/signed in the user is presented with the RPS game.
+
+
 # Resources
 
 https://bootstrap-vue.org/
@@ -57,4 +70,6 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 https://linuxhint.com/install-use-bootstrap-with-vue-js/
 
 https://medium.com/@renatello/things-i-put-in-gitignore-file-for-vue-js-projects-c53cecd8bd08
+
+https://auth0.com/blog/beginner-vuejs-tutorial-with-user-login/
 
