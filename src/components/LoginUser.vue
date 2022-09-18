@@ -70,8 +70,13 @@
 
          if (this.loggedIn){
             alert("You are now logged in");
-            localStorage.loggedIn =  true;
+            localStorage.loggedIn = true;
             this.$router.push('game');
+            window.dispatchEvent(new CustomEvent('loggedIn-localstorage-changed', {
+            detail: {
+               storage: localStorage.getItem('loggedIn')
+            }
+            }));
 
          }else{
             alert("You are not logged in");
@@ -87,10 +92,15 @@
          localStorage.name = this.nameReg;
          localStorage.email = this.emailReg;
          localStorage.password = this.passwordReg;
-         localStorage.loggedIn =  true;
+         localStorage.loggedIn = true;
          alert("You are now registered");
 
          this.loggedIn = this.checkCredentials(this.emailReg,this.passwordReg);
+         window.dispatchEvent(new CustomEvent('loggedIn-localstorage-changed', {
+            detail: {
+               storage: localStorage.getItem('loggedIn')
+            }
+            }));
          this.$router.push('game');
          
        }

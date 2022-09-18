@@ -63,7 +63,7 @@ vue add router
  If they log out then the user will have to log in again.
  Only one user can be registered/login at a time per browser.
 
- If the user is not registered and tries to access the game <url>/game they will be redirected back to the login page.
+ If the user is not registered/logged in and tries to access the game <url>/game they will be redirected back to the login page.
 
  Once registered/signed in the user is presented with the RPS game.
 
@@ -82,3 +82,12 @@ https://auth0.com/blog/beginner-vuejs-tutorial-with-user-login/
 
 https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/
 
+https://www.digitalocean.com/community/tutorials/how-to-debug-components-state-and-events-with-vue-js-devtools
+
+https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram 
+
+https://commons.wikimedia.org/wiki/File:Rock-paper-scissors.svg
+
+https://www.delftstack.com/howto/javascript/select-a-random-element-from-an-array-in-javascript/
+
+https://bootstrap-vue.org/docs/components/layout

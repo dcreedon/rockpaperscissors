@@ -7,37 +7,58 @@
         <router-link to="/logout">Logout</router-link>
       </div>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 
-var loggedIn = false;
-
-if (JSON.parse(localStorage.getItem('loggedIn')) == true) {
-  alert("logged in");
-  loggedIn = true;
-  
-}
+var loggedIn;
 
 export default {
   name: 'App',
-    data() {
-      return{
-    loggedIn,
+  data() {
+    return {
+      loggedIn,
 
+    }
+  },
+  mounted() {
+    this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+    window.addEventListener('loggedIn-localstorage-changed', (event) => {
+      this.loggedIn = event.detail.storage;
+      //alert("event info : " + this.loggedIn);
+    });
+    //this.loggedIn = localStorage.getItem('loggedIn');
+    /* Options API */
+    //alert('mounted loggedin value: ' + JSON.parse(localStorage.getItem('loggedIn')));
+    //this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+  },
+  beforeCreate() {
+    //alert('mounted loggedin value: ' + JSON.parse(localStorage.getItem('loggedIn')));
+    //loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+    this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+  },
+  created() {
+    //alert('created Value of val is: ' + this.loggedIn)
+    //alert('beforeCreated() val: ' + this.loggedIn)
+    //this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+    //alert('after beforeCreated() val: ' + this.loggedIn)
+  },
+  beforeUpdate() {
+    /*alert('beforeUpdate() val: ' + this.loggedIn)
+    loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+    alert('after beforeUpdate() val: ' + this.loggedIn)*/
+    this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+  },
+  watch: {
+    //loggedIn(logged){
+    // if (JSON.parse(localStorage.getItem('loggedIn')) == true) {
+    //alert("logged in watcher " + logged);
+    //this.loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+    // }
   }
-},
-watch: {
-  loggedIn(){
-    if (JSON.parse(localStorage.getItem('loggedIn')) == true) {
-  alert("logged in");
-  loggedIn = true;
-  
-}
-  }
-}
+
 }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">    
+  <div class="home">
     <LoginUser msg="Rock Paper Scissors Project 1"/>
   </div>
 </template>

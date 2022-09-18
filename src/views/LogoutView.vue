@@ -8,6 +8,11 @@
 <script>
   alert("logged out");
   localStorage.loggedIn = false;
-  //this.$router.push('home');
+  window.dispatchEvent(new CustomEvent('loggedIn-localstorage-changed', {
+            detail: {
+               storage: localStorage.getItem('loggedIn')
+            }
+            }));
+  //this.$router.push('/');
 </script>
   

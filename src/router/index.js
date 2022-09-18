@@ -57,8 +57,6 @@ router.beforeEach((to, from, next) => {
     if ((localStorage.getItem('loggedIn') == null) || (JSON.parse(localStorage.getItem('loggedIn')) == false)) {
       //alert("not logged in" + localStorage.getItem('loggedIn') );
       next({
-        //path: '/',
-        //replace: true,
         name: 'HomeView'
       })
     } else{ next()}
@@ -68,8 +66,6 @@ router.beforeEach((to, from, next) => {
       //alert("before each check route checkAuth " + localStorage.getItem('loggedIn'));
       next({
         path: 'game',
-        //replace: true
-        //name: 'GameView'
       })
     } else{ next()} 
   }else{

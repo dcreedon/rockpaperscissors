@@ -1,18 +1,22 @@
 <template>
-    <div class="game">
-      <h1>Game View only available to logged in users</h1>
-      <RockPaperScissors />
-    </div>
-  </template>
+  <div class="game">
+    <RockPaperScissors />
+    <GameScore />
+
+  </div>
+</template>
 
 
 <script>
+import GameScore from '@/components/GameScore.vue'
 import RockPaperScissors from '@/components/RockPaperScissors.vue'
+
 
 export default {
   name: 'GameView',
   components: {
     RockPaperScissors,
+    GameScore
 
   }
 }
