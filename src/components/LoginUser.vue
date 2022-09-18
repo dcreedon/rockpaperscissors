@@ -2,11 +2,12 @@
 <template>
 
 <div class="login-page">
+
       <transition name="fade">
          <div v-if="!registerActive" class="wallpaper-login"></div>
       </transition>
       <div class="wallpaper-register"></div>
-
+   <h1>{{ msg }}</h1>
       <div class="container">
          <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
@@ -50,7 +51,7 @@
       return{
     name: '',
     password: '',
-    loggedin: 0,
+    loggedIn: false,
     registerActive: false,
     emailLogin: "",
     passwordLogin: "",
@@ -65,7 +66,17 @@
        if (this.emailLogin === "" || this.passwordLogin === "") {
           this.emptyFields = true;
        } else {
-          alert("You are now logged in");
+         this.loggedIn = this.checkCredentials(this.emailLogin,this.passwordLogin);
+
+         if (this.loggedIn){
+            alert("You are now logged in");
+            localStorage.loggedIn =  true;
+            this.$router.push('game');
+
+         }else{
+            alert("You are not logged in");
+         }
+          
        }
     },
     
@@ -76,10 +87,28 @@
          localStorage.name = this.nameReg;
          localStorage.email = this.emailReg;
          localStorage.password = this.passwordReg;
+         localStorage.loggedIn =  true;
          alert("You are now registered");
+
+         this.loggedIn = this.checkCredentials(this.emailReg,this.passwordReg);
+         this.$router.push('game');
          
        }
+    },
+
+    checkCredentials(emailLogin, passwordLogin){
+
+      var credCheck = false;
+
+      if (localStorage.email === emailLogin && localStorage.password === passwordLogin) {
+         credCheck = true;
+      } else {
+         credCheck = false;
+      }
+
+      return credCheck;
     }
+
  },
   };
   

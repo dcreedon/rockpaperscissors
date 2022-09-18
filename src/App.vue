@@ -1,25 +1,45 @@
 <template>
   <div id="app">
-    <!--<img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <LoginUser />
-
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+      <div v-if="loggedIn">
+        <router-link to="/logout">Logout</router-link>
+      </div>
+    </nav>
+    <router-view/>
   </div>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
-//import RegisterUser from './components/RegisterUser.vue'
-import LoginUser from './components/LoginUser.vue'
-import RockPaperScissors from './components/RockPaperScissors.vue'
+
+var loggedIn = false;
+
+if (JSON.parse(localStorage.getItem('loggedIn')) == true) {
+  alert("logged in");
+  loggedIn = true;
+  
+}
 
 export default {
   name: 'App',
-  components: {
-    LoginUser,
-    RockPaperScissors
+    data() {
+      return{
+    loggedIn,
+
+  }
+},
+watch: {
+  loggedIn(){
+    if (JSON.parse(localStorage.getItem('loggedIn')) == true) {
+  alert("logged in");
+  loggedIn = true;
+  
+}
+  }
 }
 }
+
 </script>
 
 <style>
@@ -29,6 +49,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

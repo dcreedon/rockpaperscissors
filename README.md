@@ -35,6 +35,7 @@ npm install bootstrap bootstrap-vue --save
 
 change main.js to include this code:
 
+```
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -47,6 +48,10 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+```
+
+vue add router
+
 
 # Approach
  
@@ -57,6 +62,8 @@ Vue.use(IconsPlugin)
  Once the user registers they are logged in.
  If they log out then the user will have to log in again.
  Only one user can be registered/login at a time per browser.
+
+ If the user is not registered and tries to access the game <url>/game they will be redirected back to the login page.
 
  Once registered/signed in the user is presented with the RPS game.
 
@@ -72,4 +79,6 @@ https://linuxhint.com/install-use-bootstrap-with-vue-js/
 https://medium.com/@renatello/things-i-put-in-gitignore-file-for-vue-js-projects-c53cecd8bd08
 
 https://auth0.com/blog/beginner-vuejs-tutorial-with-user-login/
+
+https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/
 
