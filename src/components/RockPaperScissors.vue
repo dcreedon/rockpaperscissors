@@ -18,20 +18,33 @@
                <h2>Round {{roundCount}} Result</h2>
                <b-container class="bv-example-row text-center">
                     <b-row>
-                         <b-col sm>Human Chose <img v-bind:src="'../img/' + humanWeapon + '.png'"></b-col>                         
+                         <b-col sm>Human Chose <img v-bind:src="'../img/' + humanWeapon + '.png'"></b-col>
                          <b-col sm>Computer Chose <img v-bind:src="'../img/' + computerWeapon + '.png'"></b-col>
                          <div class="w-100"></div>
-                         <b-col sm>Winner Is <img v-bind:src="'../img/' + winningWeapon + '.png'"></b-col>
+                         <b-col sm v-if="roundDraw">It's a<img v-bind:src="'../img/' + winningWeapon + '.png'"></b-col>
+                         <b-col sm v-else>Winner is<img v-bind:src="'../img/' + winningWeapon + '.png'"></b-col>
                     </b-row>
                </b-container>
           </div>
           <div class="game-result" v-show="showGameResult">
-               game result
+               <h2>Game Over</h2>
+               <b-container class="bv-example-row text-center">
+                    <b-row>
+                         <b-col sm v-if="gameWinner == 'human'">Well done Human!<img
+                                   v-bind:src="'../img/' + gameWinner + '.png'"></b-col>
+                         <b-col sm v-else>The end is nigh! Computer Wins<img
+                                   v-bind:src="'../img/' + gameWinner + '.png'"></b-col>
+                         <div class="w-100"></div>
+                         <b-col sm><img src="../img/newgame.png" @click="startNewGame()"></b-col>
+                    </b-row>
+               </b-container>
           </div>
           <div class="score">
-               <h2>First player to {{winningNumberOfRoundsPerGame}} wins!</h2>
+               
 
                <b-container class="bv-example-row">
+                    <div v-show="showRoundScore">
+                         <h2>First player to {{winningNumberOfRoundsPerGame}} wins!</h2>
                     <b-row>
                          <b-col>Human Score</b-col>
                          <b-col>Draws</b-col>
@@ -41,6 +54,7 @@
                          <b-col>{{roundDrawCount}}</b-col>
                          <b-col>{{roundScoreComputer}}</b-col>
                     </b-row>
+                    </div>
                     <b-row>
                          <b-col>Games Won</b-col>
                     </b-row>
@@ -68,35 +82,41 @@ export default {
                humanWeapon: '',
                computerWeapon: '',
                winningWeapon: '',
+               roundDraw: false,
                roundScoreHuman: 0,
                roundScoreComputer: 0,
                roundDrawCount: 0,
                gameWinHuman: 0,
                gameWinComputer: 0,
                gameDraws: 0,
-               winningNumberOfRoundsPerGame: 10,
+               //winningNumberOfRoundsPerGame: 10,
+               winningNumberOfRoundsPerGame: 2, //for testing or else you'll be RPS for a while
                roundCount: 0,
                showGameResult: false,
                showRoundResult: false,
                showGame: true,
+               gameWinner: '',
+               showRoundScore: true,
           }
      },
      methods: {
           chooseWeapon(weapon) {
 
+               this.roundDraw = false;
                this.updateRoundCount();
                this.humanWeapon = weapon;
                var randomWeaponChosen = this.chooseRandomWeapon();
                this.computerWeapon = randomWeaponChosen;
 
                var roundResult = this.checkRoundResult(weapon, randomWeaponChosen);
-               
+
                if (roundResult == 'human') {
                     this.updateRoundScoreHuman();
                } else if (roundResult == 'computer') {
                     this.updateRoundScoreComputer();
                } else if (roundResult == 'draw') {
                     this.updateDrawCount();
+                    this.roundDraw = true;
                }
 
                this.displayRoundResult();
@@ -106,10 +126,14 @@ export default {
 
                     if (gameResult == 'human') {
                          this.updateGameWinHuman();
+                         //this.displayGameResult(gameResult);
+                         setTimeout(() => this.displayGameResult(gameResult), 3500);
                     } else if (gameResult == 'computer') {
                          this.updateGameWinComputer();
+                         //this.displayGameResult(gameResult);
+                         setTimeout(() => this.displayGameResult(gameResult), 3500);
                     } else if (gameResult == 'draw') {
-                         this.updateGameDraw();
+                         this.updateGameDraw(); // will never happen
                     }
 
                     this.resetRound();
@@ -170,7 +194,7 @@ export default {
 
                var gameResult = null;
                if (this.roundScoreHuman == this.roundScoreComputer) {
-                    gameResult = 'draw';
+                    gameResult = 'draw'; // will never happen unless computers rise up
                } else if (this.roundScoreHuman > this.roundScoreComputer) {
                     gameResult = 'human';
                } else if (this.roundScoreHuman < this.roundScoreComputer) {
@@ -193,16 +217,20 @@ export default {
                this.roundScoreHuman = 0;
                this.roundDrawCount = 0;
                this.roundCount = 0;
+               this.roundDraw = false;
           },
-          /*showGameResult(){
-
-               
-          },*/
+          displayGameResult(gameResult) {
+               this.toggleShowGame();
+               this.toggleShowGameResult();
+               this.gameWinner = gameResult;
+               this.toggleShowRoundScore();
+               //setTimeout(() => this.toggleShowGame(), 3500);               
+          },
           displayRoundResult() {
                this.toggleShowGame();
                this.toggleShowRoundResult();
-               setTimeout(() => this.toggleShowRoundResult(), 3500)
-               setTimeout(() => this.toggleShowGame(), 3500)
+               setTimeout(() => this.toggleShowRoundResult(), 3500);
+               setTimeout(() => this.toggleShowGame(), 3500);
           },
           toggleShowGameResult() {
                this.showGameResult = !this.showGameResult;
@@ -212,9 +240,15 @@ export default {
           },
           toggleShowGame() {
                this.showGame = !this.showGame;
+          },
+          toggleShowRoundScore(){
+               this.showRoundScore = !this.showRoundScore;
+          },
+          startNewGame() {
+               this.toggleShowGameResult();
+               this.toggleShowGame();
+               this.toggleShowRoundScore();
           }
-
-
      }
 }
 
