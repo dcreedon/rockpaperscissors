@@ -91,3 +91,8 @@ https://commons.wikimedia.org/wiki/File:Rock-paper-scissors.svg
 https://www.delftstack.com/howto/javascript/select-a-random-element-from-an-array-in-javascript/
 
 https://bootstrap-vue.org/docs/components/layout
+
+
+# Path on local dev machine
+/mnt/ntfs1/Development/client-side/rockpaperscissors
+

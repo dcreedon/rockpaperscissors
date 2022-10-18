@@ -3,9 +3,9 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <div v-if="loggedIn">
-        <router-link to="/logout">Logout</router-link>
-      </div>
+      <!-- <div v-if="loggedIn"> -->
+        <router-link v-if="loggedIn" to="/logout">| Logout</router-link>
+       <!-- </div> -->
     </nav>
     <router-view />
   </div>

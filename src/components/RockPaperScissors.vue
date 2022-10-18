@@ -3,7 +3,7 @@
      <div class="rockpaperscissors">
 
           <div class="game-start" v-show="showGame">
-               <h2>Choose your weapon (click/tap an image) Round {{roundCount + 1}}</h2>
+               <div>Choose your weapon (click/tap an image) Round {{roundCount + 1}}</div>
                <b-container class="bv-example-row text-center">
                     <b-row>
                          <b-col sm>Rock <img src="../img/rock.png" @click="chooseWeapon('rock')"></b-col>
@@ -27,7 +27,7 @@
                </b-container>
           </div>
           <div class="game-result" v-show="showGameResult">
-               <h2>Game Over</h2>
+               <div><strong>Game Over</strong></div>
                <b-container class="bv-example-row text-center">
                     <b-row>
                          <b-col sm v-if="gameWinner == 'human'">Well done Human!<img
